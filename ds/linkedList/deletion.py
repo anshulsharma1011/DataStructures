@@ -2,7 +2,7 @@
 1. Delete Node with given Data
 2. POP operation
 3. Delete Complete List
-
+4. Delete every N nodes in a linked list after skipping M nodes
 """
 
 class Node:
@@ -93,6 +93,28 @@ def deleteAll(linkedList):
         linkedList.deleteNode(headPointer.data)
         headPointer = headPointer.next
 
+def deleteMNNodes(head, m, n):
+    # base case
+    if head is None or head.next is None:
+        return head
+    prev = None
+    curr = head
+    while curr:
+        # skip m nodes
+        for i in range(1, m + 1):
+            prev = curr
+            curr = curr.next
+
+        # delete next n nodes
+        for i in range(1, n + 1):
+            if curr:
+                curr = curr.next
+                
+        # link remaining nodes with last node
+        prev.next = curr
+        # recur for remaining nodes
+        # deleteNodes(curr, m, n)
+    return head
 
 if __name__ == '__main__':
     link = LinkedList()
