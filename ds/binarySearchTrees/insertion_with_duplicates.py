@@ -12,7 +12,7 @@ class Node:
         self.right = None
         self.count = 1
 
-
+'''
 class BinarySearchTree:
     def __init__(self):
         self.root = None
@@ -51,10 +51,37 @@ class BinarySearchTree:
         if root.right:
             self.traverse_in_order(root.right)
 
+'''
+
+def insertNode(data, root):
+    if root is None:
+        return Node(data)
+
+    if data < root.data:
+        root.left = insertNode(data, root.left)
+
+    elif data > root.data:
+        root.right = insertNode(data, root.right)
+
+    else:
+        root.count += 1
+
+    return root
+
+
+def inorderTraversal(root):
+    if root is None:
+        return
+    inorderTraversal(root.left)
+    print("%d (%d)" % (root.data,root.count), end=" ")
+    inorderTraversal(root.right)
+
+
 
 if __name__ == '__main__':
-    bst = BinarySearchTree()
+    root= None
     list = [12, 10, 20, 9, 11, 10, 12, 12]
     for i in list:
-        bst.insertNode(i)
-    bst.traverse()
+        root = insertNode(i, root)
+
+    inorderTraversal(root)

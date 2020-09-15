@@ -12,6 +12,7 @@ class Node:
         self.right = None
 
 
+'''
 class BinarySearchTree:
     def __init__(self):
         self.root = None
@@ -47,16 +48,35 @@ class BinarySearchTree:
 
         if root.right:
             self.traverse_in_order(root.right)
+'''
+
+
+def insertNode(data, root):
+    if root is None:
+        return Node(data)
+
+    if data < root.data:
+        root.left = insertNode(data, root.left)
+
+    else:
+        root.right = insertNode(data, root.right)
+
+    return root
+
+
+def inorderTraversal(root):
+    if root is None:
+        return
+    inorderTraversal(root.left)
+    print("%d" % root.data, end=" ")
+    inorderTraversal(root.right)
 
 
 if __name__ == '__main__':
-    bst = BinarySearchTree()
-    bst.insertNode(10)
-    bst.insertNode(9)
-    bst.insertNode(8)
-    bst.insertNode(7)
-    bst.insertNode(6)
-    bst.insertNode(5)
-    bst.insertNode(4)
-    bst.insertNode(3)
-    bst.traverse()
+    root = None
+    list = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+
+    for i in list:
+        root = insertNode(i, root)
+
+    inorderTraversal(root)
